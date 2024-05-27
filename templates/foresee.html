@@ -1,18 +1,35 @@
 {% extends 'default.html' %}
 
 {% block conteudo %}
-<div class="container-fluid">
-    <form method="get" action="" class="m-2">
+
+<div class="container">
+    <h2 class="my-3">Selecione o campeonato</h1>
+    <div class="row">
+        {% for opcoes in listaSelect %}
+        <div class="col align-self-center m-5">
+            <div class="card">
+                <img src="https://www.svgrepo.com/show/451667/image-missing.svg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{ opcoes.nome }}</h5>
+                  <p class="card-text">Campeonato {{ opcoes.nome }}</p>
+                  <a href="#" class="btn btn-primary">Selecionar</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+<!-- <form method="get" action="" class="m-2">
         <fieldset>
             <div>
                 <select class="form-select" aria-label="Default select example">
                     <option selected>Selecione o campeonato</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    {% for opcoes in listaSelect %}
+                    <option value="{{ opcoes.div }}">{{ opcoes.nome }}</option>
+                    {% endfor %}
                 </select>
             </div>
         </fieldset>
-    </form>
-</div>
-{% endblock %}
+    </form> -->
