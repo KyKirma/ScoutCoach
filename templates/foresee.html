@@ -8,11 +8,11 @@
         {% for opcoes in listaSelect %}
         <div class="col align-self-center m-5">
             <div class="card">
-                <img src="https://www.svgrepo.com/show/451667/image-missing.svg" class="card-img-top" alt="...">
+                <img src="https://www.svgrepo.com/show/451667/image-missing.svg" class="card-img-top" alt="Imagem bandeira">
                 <div class="card-body">
                   <h5 class="card-title">{{ opcoes.nome }}</h5>
                   <p class="card-text">Campeonato {{ opcoes.nome }}</p>
-                  <a href="#" class="btn btn-primary">Selecionar</a>
+                  <a href="{{ url_for('campEscolhido', nome = opcoes.nome) }}" class="btn btn-primary">Selecionar</a>
                 </div>
             </div>
         </div>
