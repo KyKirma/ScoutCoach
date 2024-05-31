@@ -15,12 +15,6 @@ if __name__ == '__main__':
         db.drop_all()
         db.create_all()
         atualizarDB()
-
-    #try:
-    #    pip.main(['install', '-r', 'requirements.txt'])
-    #except Exception as e:
-    #    print(f"Erro ao instalar pacotes: {e}")
-    #finally:
-    #    app.run(debug = True)
+    
     app.run(debug=True)
 

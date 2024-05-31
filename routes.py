@@ -1,6 +1,6 @@
 from flask import render_template, redirect, url_for
-from main import db, app
-from models import Campeonato
+from main import app, db
+from models import Campeonato, TPC
 
 @app.route('/')
 def home():
@@ -14,4 +14,9 @@ def foresee():
 
 @app.route('/previsoes/<nome>')
 def campEscolhido(nome):
-    redirect(url_for('foresee'))
+    #O nome vem no formato: 'Div Regiao Ano'
+    info = nome.split()
+    timesNoCamp = TPC.query.filter_by(CampAno = str(info[2]), Divisao = str(info[0])).all()
+
+    return render_template('times.html',
+                           lista = timesNoCamp)

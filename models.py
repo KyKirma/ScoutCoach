@@ -17,14 +17,14 @@ class Times(db.Model):
     def __repr__(self):
         return f"Times(nome={self.nome!r})"
     
-""" class TPC(db.Model):
-    __tablename__ = "Times por Campeonato"
+class TPC(db.Model):
+    __tablename__ = "TPC"
     CampAno = db.Column(db.Integer, primary_key = True, nullable = False)
-    Div = db.Column(db.String(3), primary_key = True, nullable = False)
+    Divisao = db.Column(db.String(3), primary_key = True, nullable = False)
     Time = db.Column(db.String(50), primary_key = True, nullable = False)
 
     def __repr__(self):
-        return f"TPC(CampAno = {self.CampAno!r}, Div = {self.Div!r}, Time = {self.Time!r})" """
+        return f"TPC(CampAno = {self.CampAno!r}, Divisao = {self.Divisao!r}, Time = {self.Time!r})"
 
 class Jogo(db.Model):
     __tablename__ = "Jogos"

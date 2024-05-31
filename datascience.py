@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 from main import db
-from models import Campeonato, Times, Jogo
+from models import Campeonato, Times, Jogo, TPC
 
 CSVPath = "./DataBase"
 CSVFiles = os.listdir(CSVPath)
@@ -25,6 +25,8 @@ def atualizarDB():
     ListaTimes = []
     ListaCamp = []
     ListaJogos = []
+    ListaTCP = []
+
     for arquivos_csv in CSVFiles:
         df = pd.read_csv(os.path.join(CSVPath, arquivos_csv))
         df['Regiao'] = df['Div'].str.extract(r'(\D{1,2})\d?')[0].map(div_to_regiao)
@@ -37,6 +39,8 @@ def atualizarDB():
         nome = "{} {} {}".format(div, regiao, ano)
         ListaCamp.append(Campeonato(div = div, ano = ano, regiao = regiao, nome = nome))
 
+        #Variavel para a tabela TPC
+        times = []
         for index, row in df.iterrows():
             #Tabela Times
             home_team = row['HomeTeam']
@@ -51,12 +55,23 @@ def atualizarDB():
             nome = "{} {} {}".format(div, regiao, ano)
             ListaJogos.append(Jogo(nome = nome, div = div, ano = ano, hometeam = home_team, awayteam = away_team, regiao = regiao))
 
+            #Tabela TPC
+            times.append(home_team)
+            times.append(away_team)
+
+        timesTPC = list(set(times))
+        for itens in timesTPC:
+            ListaTCP.append(TPC(CampAno = ano, Divisao = div, Time = itens))
+
+
     TimesTotal = list(set(ListaTimes))
     CampTotal = list(set(ListaCamp))
+
     for itens in TimesTotal:
         db.session.add(Times(nome = itens))
     
     db.session.add_all(CampTotal)
     db.session.add_all(ListaJogos)
+    db.session.add_all(ListaTCP)
     db.session.commit()
 

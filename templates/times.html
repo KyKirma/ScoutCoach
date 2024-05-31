@@ -1,0 +1,16 @@
+{% extends 'default.html' %}
+
+{% block conteudo %}
+<div class="container">
+    <h2 class="my-3">Selecione o campeonato</h1>
+        {% for times in lista %}
+        <div class="card text-bg-dark my-3">
+            <svg class="bd-placeholder-img bd-placeholder-img-lg card-img" width="100%" height="270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Card image" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Card image</text></svg>
+            <div class="card-img-overlay">
+                <h5 class="card-title">{{ times.Time }}</h5>
+                <p class="card-text">teste</p>
+            </div>
+        </div>
+        {% endfor %}
+</div>
+{% endblock %}
