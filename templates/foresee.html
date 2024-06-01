@@ -9,7 +9,7 @@
         {% for opcoes in listaSelect %}
         <div class="col align-self-center m-5">
             <div class="card">
-                <img src="https://www.svgrepo.com/show/451667/image-missing.svg" class="card-img-top" alt="Imagem bandeira">
+                <img src="https://flagsapi.com/{{ opcoes.codigo }}/flat/64.png" alt="https://www.svgrepo.com/show/451667/image-missing.svg">
                 <div class="card-body">
                   <h5 class="card-title">{{ opcoes.nome }}</h5>
                   <p class="card-text">Campeonato {{ opcoes.nome }}</p>
@@ -21,16 +21,3 @@
     </div>
 </div>
 {% endblock %}
-
-<!-- <form method="get" action="" class="m-2">
-        <fieldset>
-            <div>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Selecione o campeonato</option>
-                    {% for opcoes in listaSelect %}
-                    <option value="{{ opcoes.div }}">{{ opcoes.nome }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-        </fieldset>
-    </form> -->

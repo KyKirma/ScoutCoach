@@ -22,6 +22,21 @@ def atualizarDB():
     'T': 'Turquia',
     }
 
+    #?Dic para funcionar a API Flag
+    flags = {
+    'B' : 'BE',
+    'D' : 'DE',
+    'E' : 'GB',
+    'F' : 'FR',
+    'G' : 'GR',
+    'I' : 'IT',
+    'N' : 'NL',
+    'P' : 'PT',
+    'SC' : 'SC',
+    'SP' : 'ES',
+    'T' : 'TR',
+    }
+
     ListaTimes = []
     ListaCamp = []
     ListaJogos = []
@@ -30,14 +45,16 @@ def atualizarDB():
     for arquivos_csv in CSVFiles:
         df = pd.read_csv(os.path.join(CSVPath, arquivos_csv))
         df['Regiao'] = df['Div'].str.extract(r'(\D{1,2})\d?')[0].map(div_to_regiao)
+        df['Codigo'] = df['Div'].str.extract(r'(\D{1,2})\d?')[0].map(flags)
         df['Ano'] = df['Date'].str.extract(r'(\d{4})')
 
         #Tabela Campeonatos
         div = df['Div'].iloc[0]
         regiao = df['Regiao'].iloc[0]
+        codigo = df['Codigo'].iloc[0]
         ano = df['Ano'].iloc[0]
         nome = "{} {} {}".format(div, regiao, ano)
-        ListaCamp.append(Campeonato(div = div, ano = ano, regiao = regiao, nome = nome))
+        ListaCamp.append(Campeonato(div = div, ano = ano, regiao = regiao, codigo = codigo, nome = nome))
 
         #Variavel para a tabela TPC
         times = []

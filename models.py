@@ -5,10 +5,11 @@ class Campeonato(db.Model):
     div = db.Column(db.String(3), primary_key = True, nullable = False)
     ano = db.Column(db.Integer, primary_key = True, nullable = False)
     regiao = db.Column(db.String(20))
+    codigo = db.Column(db.String(2))
     nome = db.Column(db.String(50))
 
     def __repr__(self):
-        return f"Campeonato(div={self.div!r}, ano={self.ano!r}, regiao={self.regiao!r}, nome={self.nome!r})"
+        return f"Campeonato(div={self.div!r}, ano={self.ano!r}, regiao={self.regiao!r}, codigo={self.codigo!r}, nome={self.nome!r})"
 
 class Times(db.Model):
     __tablename__ = "Times"
