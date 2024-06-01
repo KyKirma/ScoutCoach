@@ -2,15 +2,39 @@
 
 {% block conteudo %}
 <div class="container">
-    <h2 class="my-3">Selecione o campeonato</h1>
-        {% for times in lista %}
-        <div class="card text-bg-dark my-3">
-            <svg class="bd-placeholder-img bd-placeholder-img-lg card-img" width="100%" height="270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Card image" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Card image</text></svg>
-            <div class="card-img-overlay">
-                <h5 class="card-title">{{ times.Time }}</h5>
-                <p class="card-text">teste</p>
-            </div>
+    <h2 class="my-3">Selecione o time</h2>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col" style="max-width: 18rem;">
+            <fieldset class="border p-2" style="border-radius: 10px;">
+                {% for time in lista %}
+                <div class="align-self-center">
+                    <div class="d-grid m-2">
+                          <a href="{{ url_for('timeEscolhido', nome = nome, time = time.Time) }}" class="btn btn-primary"><h5 class="card-title">{{ time.Time }}</h5></a>
+                    </div>
+                </div>
+                {% endfor %}
+            </fieldset>
         </div>
-        {% endfor %}
+        <div class="col">
+            {% for jogo in listaJ1 %}
+            <div class="align-self-center">
+                <div class="d-grid m-2">
+                    <h3>{{ jogo.nome }}</h3>
+                    <h2>{{ jogo.hometeam }} x {{ jogo.awayteam }}</h2>
+                </div>
+            </div>
+            {% endfor %}
+            {% for jogo in listaJ2 %}
+            <div class="align-self-center">
+                <div class="d-grid m-2">
+                    <h3>{{ jogo.nome }}</h3>
+                    <h2>{{ jogo.awayteam }} x {{ jogo.hometeam }}</h2>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </div>
 {% endblock %}
