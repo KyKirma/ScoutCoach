@@ -18,22 +18,19 @@
             </fieldset>
         </div>
         <div class="col">
-            {% for jogo in listaJ1 %}
-            <div class="align-self-center">
-                <div class="d-grid m-2">
-                    <h3>{{ jogo.nome }}</h3>
-                    <h2>{{ jogo.hometeam }} x {{ jogo.awayteam }}</h2>
-                </div>
-            </div>
-            {% endfor %}
-            {% for jogo in listaJ2 %}
-            <div class="align-self-center">
-                <div class="d-grid m-2">
-                    <h3>{{ jogo.nome }}</h3>
-                    <h2>{{ jogo.awayteam }} x {{ jogo.hometeam }}</h2>
-                </div>
-            </div>
-            {% endfor %}
+            <select class="form-select form-select-lg mb-3" aria-label="Large select example">
+                <option selected>Selecione um time</option>
+                {% for jogo in listaJ1 %}
+                <option value="{{ jogo.id }}">
+                    {{ jogo.nome }} | {{ jogo.hometeam }} x {{ jogo.awayteam }}
+                </option>
+                {% endfor %}
+                {% for jogo in listaJ2 %}
+                <option value="{{ jogo.id }}">
+                    {{ jogo.nome }} | {{ jogo.awayteam }} x {{ jogo.hometeam }}
+                </option>
+                {% endfor %}
+            </select>
         </div>
     </div>
 </div>
