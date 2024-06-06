@@ -11,7 +11,7 @@
             <div class="card">
                 <img src="https://flagsapi.com/{{ opcoes.codigo }}/flat/64.png" alt="https://www.svgrepo.com/show/451667/image-missing.svg">
                 <div class="card-body">
-                  <h5 class="card-title">{{ opcoes.nome }}</h5>
+                  <h5 class="card-title">{{ opcoes.regiao }} - {{ opcoes.ano }}</h5>
                   <p class="card-text">Campeonato {{ opcoes.nome }}</p>
                   <a href="{{ url_for('campEscolhido', nome = opcoes.nome) }}" class="btn btn-primary">Selecionar</a>
                 </div>
