@@ -1,12 +1,14 @@
 import pandas as pd
-import os
+import os, shutil
 from main import db
 from models import Campeonato, Times, Jogo, TPC
 
 CSVPath = "./DataBase"
 CSVFiles = os.listdir(CSVPath)
+CSVCache = "./Cache"
 
 def atualizarDB():
+
     #?Filtrar as regiões pelas div dos mesmos.
     div_to_regiao = {
     'B': 'Belgica',
@@ -92,3 +94,17 @@ def atualizarDB():
     db.session.add_all(ListaTCP)
     db.session.commit()
 
+def corrigirCSVs():
+    for arquivos_csv in CSVFiles:
+        df = pd.read_csv(os.path.join(CSVPath, arquivos_csv))
+        df['Date'] = pd.to_datetime(df['Date'], format = 'mixed')
+
+        if len(df['Date'].dt.year.unique()) != 1:
+
+            for ano in df['Date'].dt.year.unique():
+                df_ano = df[df['Date'].dt.year == ano]
+                div = df_ano['Div'].head(1)
+                nome = f'{CSVPath}/{div.values[0]}_{ano}.csv'
+                df_ano.to_csv(nome, index=False)
+
+            shutil.move(os.path.join(CSVPath, arquivos_csv), CSVCache)
