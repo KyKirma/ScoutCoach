@@ -36,7 +36,3 @@ def timeEscolhido(nome, time):
                            listaJ2 = jogosTime2,
                            lista = timesNoCamp,
                            nome = nome)
-
-@app.route('/theme')
-def tema():
-    pass
