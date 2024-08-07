@@ -1,7 +1,7 @@
 import pandas as pd
 import os, shutil
 from main import db
-from models import Campeonato, Times, Jogo, TPC
+from Cache.FootballdataukDataScience.models import Campeonato, Times, Jogo, TPC
 
 CSVPath = "./DataBase"
 CSVFiles = os.listdir(CSVPath)

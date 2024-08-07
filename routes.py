@@ -1,6 +1,6 @@
 from flask import render_template, redirect, url_for
 from main import app
-from models import Campeonato, TPC, Jogo
+from Cache.FootballdataukDataScience.models import Campeonato, TPC, Jogo
 
 @app.route('/')
 def home():
