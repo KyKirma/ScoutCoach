@@ -22,8 +22,10 @@ driver = webdriver.Chrome(options=options)
 # Bibliotecas extras
 import time
 import pandas as pd
+import logging
 from tqdm import tqdm
 
+logging.basicConfig(filename='webscrapper.log')
 """ driver.get("https://www.flashscore.com.br/futebol/brasil/brasileirao-betano-2023//resultados") 
 time.sleep(2) """
 
@@ -155,8 +157,11 @@ for evento in eventosCampeonato:
 
 # Filtro de seleção de campeonato
 campSelecionado = linksCamp[1] """
+
+logging.info('Iniciando o programa')
 campSelecionado = 'https://www.flashscore.com.br/futebol/brasil/brasileirao-betano-2023//resultados'
-print(f'Capturando os dados de [{campSelecionado}]')
+logging.info(f'Capturando os dados de [{campSelecionado}]')
+print('Programa será iniciado, qualquer evento e erro será gravado em webscrapper.log')
 
 driver.get(campSelecionado)
 time.sleep(1)
@@ -173,10 +178,9 @@ if sanfonas:
         while sanfonas:
             sanfonas.click()
             time.sleep(3)
-            print('click feito')
             sanfonas = driver.find_element(By.CSS_SELECTOR, 'a.event__more')
     except Exception as error:
-        print('Não há mais sanfonas')
+        logging.info('Não há mais sanfonas')
 
 # Pega os jogos do ano
 eventos = driver.find_elements(By.CSS_SELECTOR, 'div.event__match--twoLine')
@@ -185,6 +189,7 @@ for evento in eventos:
     link = evento.find_element(By.CSS_SELECTOR, 'a')
     links.append(link.get_attribute("href"))
 
+logging.info('Iniciando coleta de dados')
 for link in tqdm(links, total = len(links)):
     try:
         # Cria um conjunto de chaves que precisam ser preenchidas
@@ -237,9 +242,10 @@ for link in tqdm(links, total = len(links)):
             dados[chave].append('-')
 
     except Exception as error:
-        print(f'\n Erro na coleta de dados: {error} \n No jogo {nomeHome} x {nomeAway}')
+        logging.error(f'\n Erro na coleta de dados: {error} \n No jogo {nomeHome} x {nomeAway}')
 
 
 df = pd.DataFrame(dados)
-filename = 'datasetFlashScore2.csv'
+filename = 'datasetFlashScore.csv'
 df.to_csv(filename, sep = ';', index = False)
+logging.info(f'Programa finalizado, aquivo CSV criado na pasta local, com o nome de {filename}')
