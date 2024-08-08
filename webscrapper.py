@@ -25,7 +25,7 @@ import pandas as pd
 import logging
 from tqdm import tqdm
 
-logging.basicConfig(filename='webscrapper.log')
+logging.basicConfig(filename='webscrapper.log', level='INFO')
 """ driver.get("https://www.flashscore.com.br/futebol/brasil/brasileirao-betano-2023//resultados") 
 time.sleep(2) """
 
@@ -159,7 +159,7 @@ for evento in eventosCampeonato:
 campSelecionado = linksCamp[1] """
 
 logging.info('Iniciando o programa')
-campSelecionado = 'https://www.flashscore.com.br/futebol/brasil/brasileirao-betano-2023//resultados'
+campSelecionado = 'https://www.flashscore.com.br/futebol/brasil/brasileirao-betano-2022//resultados'
 logging.info(f'Capturando os dados de [{campSelecionado}]')
 print('Programa será iniciado, qualquer evento e erro será gravado em webscrapper.log')
 
@@ -246,6 +246,6 @@ for link in tqdm(links, total = len(links)):
 
 
 df = pd.DataFrame(dados)
-filename = 'datasetFlashScore.csv'
+filename = 'datasetFlashScore2022.csv'
 df.to_csv(filename, sep = ';', index = False)
 logging.info(f'Programa finalizado, aquivo CSV criado na pasta local, com o nome de {filename}')
